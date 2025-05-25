@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lightning Distance Calculator</title>
+    <title>Lightning Channel Characteristic Analysis - Final Year Project</title>
     <style>
         * {
             margin: 0;
@@ -13,104 +13,176 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
         }
 
-        .calculator-container {
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: #1e3c72;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 2rem 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            color: white;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Section Styles */
+        .section {
+            display: none;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 40px;
+            padding: 3rem;
+            margin: 2rem 0;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            max-width: 450px;
-            width: 100%;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section h2 {
+            color: #1e3c72;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
             text-align: center;
-            transform: translateY(0);
-            transition: transform 0.3s ease;
         }
 
-        .calculator-container:hover {
-            transform: translateY(-5px);
+        /* Calculator Styles */
+        .calculator-container {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
         }
 
-        h1 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 2rem;
-            font-weight: 700;
-        }
-
-        .subtitle {
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-            line-height: 1.5;
+        .lightning-icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
         }
 
         .input-group {
-            margin-bottom: 25px;
+            margin-bottom: 2rem;
             text-align: left;
         }
 
-        label {
+        .input-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 0.5rem;
             color: #555;
             font-weight: 600;
-            font-size: 1rem;
         }
 
-        input[type="number"] {
+        .input-group input {
             width: 100%;
-            padding: 15px;
+            padding: 1rem;
             border: 2px solid #e1e5e9;
             border-radius: 12px;
             font-size: 1.1rem;
             transition: all 0.3s ease;
-            background: #f8f9fa;
         }
 
-        input[type="number"]:focus {
+        .input-group input:focus {
             outline: none;
-            border-color: #667eea;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #1e3c72;
+            box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
         }
 
         .calculate-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
             border: none;
             border-radius: 12px;
-            padding: 15px 40px;
+            padding: 1rem 2rem;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-bottom: 25px;
             width: 100%;
+            margin-bottom: 2rem;
         }
 
         .calculate-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-        }
-
-        .calculate-btn:active {
-            transform: translateY(0);
+            box-shadow: 0 10px 25px rgba(30, 60, 114, 0.3);
         }
 
         .result-container {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 20px;
+            padding: 1.5rem;
             border-radius: 12px;
-            margin-top: 20px;
+            margin-top: 1rem;
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.5s ease;
@@ -121,24 +193,12 @@
             transform: translateY(0);
         }
 
-        .result-text {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .result-details {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
         .error-message {
             background: #ff6b6b;
             color: white;
-            padding: 15px;
+            padding: 1rem;
             border-radius: 12px;
-            margin-top: 20px;
-            font-weight: 600;
+            margin-top: 1rem;
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.5s ease;
@@ -149,80 +209,525 @@
             transform: translateY(0);
         }
 
-        .info-box {
-            background: #e3f2fd;
-            border-left: 4px solid #2196f3;
-            padding: 15px;
-            margin-top: 20px;
+        /* Gallery Styles */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .lightning-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .lightning-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .lightning-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .lightning-item img:hover {
+            transform: scale(1.05);
+        }
+
+        .lightning-info {
+            padding: 1.5rem;
+        }
+
+        .lightning-info h3 {
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .lightning-info p {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .view-video-btn {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
             border-radius: 8px;
-            text-align: left;
-            color: #1565c0;
-            font-size: 0.9rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
         }
 
-        .lightning-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
+        .view-video-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
         }
 
-        @media (max-width: 480px) {
-            .calculator-container {
-                padding: 25px;
-                margin: 10px;
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: relative;
+            margin: 5% auto;
+            max-width: 90%;
+            max-height: 80%;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .modal img, .modal video {
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+            object-fit: contain;
+        }
+
+        .modal-info {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 2001;
+            background: rgba(0, 0, 0, 0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close:hover {
+            background: rgba(255, 0, 0, 0.7);
+        }
+
+        /* About Section */
+        .about-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content h3 {
+            color: #1e3c72;
+            margin: 2rem 0 1rem;
+            font-size: 1.5rem;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .tech-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
             }
 
-            h1 {
-                font-size: 1.7rem;
+            .hero h1 {
+                font-size: 2rem;
             }
 
-            .subtitle {
-                font-size: 1rem;
+            .section {
+                padding: 2rem 1rem;
+                margin: 1rem;
+            }
+
+            .container {
+                padding: 80px 1rem 1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-stack {
+                gap: 1rem;
+            }
+
+            .tech-item {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .mobile-nav button {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #1e3c72;
+            color: #1e3c72;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav button:hover, .mobile-nav button.active {
+            background: #1e3c72;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-nav {
+                display: flex;
             }
         }
     </style>
 </head>
 <body>
-    <div class="calculator-container">
-        <div class="lightning-icon">⚡</div>
-        <h1>Lightning Distance Calculator</h1>
-        <p class="subtitle">Calculate how far lightning struck based on the time difference between flash and thunder</p>
-        
-        <div class="input-group">
-            <label for="timeInput">Time difference between flash and thunder (seconds):</label>
-            <input type="number" id="timeInput" placeholder="Enter time in seconds" step="0.1" min="0">
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">⚡PSM1 & PSM2 FTKEK BERR</div>
+            <ul class="nav-links">
+                <li><a onclick="showSection('home')">Home</a></li>
+                <li><a onclick="showSection('calculator')">Calculator</a></li>
+                <li><a onclick="showSection('gallery')">Research Gallery</a></li>
+                <li><a onclick="showSection('about')">About Project</a></li>
+            </ul>
         </div>
-        
-        <button class="calculate-btn" onclick="calculateDistance()">Calculate Distance</button>
-        
-        <div id="resultContainer" class="result-container">
-            <div class="result-text" id="resultText"></div>
-            <div class="result-details" id="resultDetails"></div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Characterization of Lightning Channel using Image Processing Technique</h1>
+            <p>by SAM ZHI KANG B022120028 </p>
+            
+            <p>supervisor PROFESOR MADYA DR MOHD RIDUAN BIN AHMAD </p>
         </div>
-        
-        <div id="errorMessage" class="error-message"></div>
-        
-        <div class="info-box">
-            <strong>How it works:</strong> Sound travels at approximately 1,125 feet per second (343 meters per second). Since there are 5,280 feet in a mile, dividing the time by 5 gives you the distance in miles.
+
+        <!-- Mobile Navigation -->
+        <div class="mobile-nav">
+            <button onclick="showSection('home')" class="active" id="home-btn">🏠 Home</button>
+            <button onclick="showSection('calculator')" id="calculator-btn">🧮 Calculator</button>
+            <button onclick="showSection('gallery')" id="gallery-btn">📸 Research Gallery</button>
+            <button onclick="showSection('about')" id="about-btn">📋 About Project</button>
+        </div>
+
+        <!-- Home Section -->
+        <div id="home" class="section active">
+            <h2>⚡Welcome to Lightning Research</h2>
+            <div class="about-content">
+                <p>Lightning is an unpredictable natural phenomenon. Its rapid occurrence and intense brightness make it challenging to capture and analyze. Develop a cost-effective lightning channel capture system, eliminating the need for expensive, high-quality camera equipment. Utilize Raspberry Pi Camera V2 to capture lightning channels.Implement image processing algorithms to analyze lightning characteristics, including structure and branching patterns.Powered by a solar panel, utilizing renewable energy for an environmentally sustainable solution.</p>
+                
+                <h3>🔬 Research Highlights</h3>
+                <p>The research able captured and analyzed multiple lightning events by using low cost and renewable energy devices, providing valuable data (Performance Matrics) on lightning behavior, distance calculations,slow-motion algorithm, and channel characteristics. This research contributes to better understanding of lightning phenomena and improved safety measures.</p>
+                
+                <h3>⚡ Key Features</h3>
+                <div class="tech-stack">
+                    <div class="tech-item">Real-time Detection</div>
+                    <div class="tech-item"> Ligthning Distance Calculation</div>
+                    <div class="tech-item">Lightning channel Characteristic</div>
+                    <div class="tech-item">Data Logging</div>
+                    <div class="tech-item">Web development</div>
+                </div>
+                
+                
+              <h2>Me And Supervisor</h2>
+
+<div style="display: flex; gap: 300px; align-items: center;">
+  
+  <div>
+    <h3>SAM ZHI KANG</h3>
+    <img src="https://github.com/SZK0724/lightning-calculator/blob/eff3721f6700c1d6d0dfc6a6ba73135a3c85fe26/samzhikang.png?raw=true" 
+         alt="Sam Zhi Kang" 
+         style="width: 200px; height: 250px; object-fit: cover;">
+  </div>
+
+  <div>
+    <h3>DR MOHD RIDUAN BIN AHMAD</h3>
+    <img src="https://github.com/SZK0724/lightning-calculator/blob/eff3721f6700c1d6d0dfc6a6ba73135a3c85fe26/DRRIDUAN.png?raw=true" 
+         alt="Dr. Riduan" 
+         style="width: 200px; height: 250px; object-fit: cover;">
+  </div>
+
+</div>
+
+
+                
+                <p>Navigate through the sections above to explore my lightning distance calculator and view our comprehensive research gallery featuring captured lightning events.</p>
+            </div>
+        </div>
+
+        <!-- Calculator Section -->
+        <div id="calculator" class="section">
+            <h2>Lightning Distance Calculator</h2>
+            <div class="calculator-container">
+                <div class="lightning-icon">⚡</div>
+                <p style="margin-bottom: 2rem; color: #666; font-size: 1.1rem;">Calculate the distance of lightning strikes based on the time difference between flash and thunder</p>
+                
+                <div class="input-group">
+                    <label for="timeInput">Time difference between flash and thunder (seconds):</label>
+                    <input type="number" id="timeInput" placeholder="Enter time in seconds" step="0.1" min="0">
+                </div>
+                
+                <button class="calculate-btn" onclick="calculateDistance()">Calculate Distance</button>
+                
+                <div id="resultContainer" class="result-container">
+                    <div id="resultText" style="font-size: 1.3rem; font-weight: 600; margin-bottom: 0.5rem;"></div>
+                    <div id="resultDetails"></div>
+                </div>
+                
+                <div id="errorMessage" class="error-message"></div>
+                
+                <div style="background: #e3f2fd; border-left: 4px solid #2196f3; padding: 1rem; margin-top: 2rem; border-radius: 8px; text-align: left; color: #1565c0;">
+                    <strong>How it works:</strong> Sound travels at approximately 1,125 feet per second. Since there are 5,280 feet in a mile, dividing the time by 5 gives you the distance in miles.
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery Section -->
+        <div id="gallery" class="section">
+            <h2>Lightning Research Gallery</h2>
+            <p style="text-align: center; margin-bottom: 2rem; font-size: 1.1rem; color: #666;">
+                Collection of lightning events captured and analyzed using our Raspberry Pi detection system
+            </p>
+            
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Gallery items will be generated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div id="about" class="section">
+            <h2>About This Project</h2>
+            <div class="about-content">
+                <h3>🎯 Project Objective</h3>
+                <p>1. To design and develop lightning channel capturing system utilizing raspberry pi platform and client to server architecture.<p> 2. To develop and find the optimal algorithm to analyze characterization of lightning channel such as channel length, branching, and intensity. 
+</p>
+                
+                <h3>🛠 Technology Used</h3>
+                <div class="tech-stack">
+                    <div class="tech-item">Raspberry Pi</div>
+                    <div class="tech-item">Python</div>
+                    <div class="tech-item">OpenCV</div>
+                    <div class="tech-item">Matlab</div>
+                    <div class="tech-item">C++</div>
+                    <div class="tech-item">Web Technologies</div>
+                </div>
+                
+                <h3>📊 Research Methodology</h3>
+                <p>Combines hardware-based lightning detection with software analysis to capture and process lightning events. The system uses advanced algorithms to calculate lightning distance, analyze lightning channel characteristics. Further more, the system using a solar panel-powered system aligns with sustainable energy goals, reducing environmental impact and supporting SDG 12.</p>
+                
+                <h3>🔍 Key Findings</h3>
+                <p>The research able captured and analyzed multiple lightning events by using low cost and renewable energy devices, providing valuable data (Performance Matrics) on lightning behavior, distance calculations,slow-motion algorithm, and channel characteristics. This research contributes to better understanding of lightning phenomena and improved safety measures.</p>
+                
+                <h3>🎓 Project Summary</h3>
+                <p>Lightning is an unpredictable natural phenomenon. Its rapid occurrence and intense brightness make it challenging to capture and analyze. Develop a cost-effective lightning channel capture system, eliminating the need for expensive, high-quality camera equipment. Utilize Raspberry Pi Camera V2 to capture lightning channels.Implement image processing algorithms to analyze lightning characteristics, including structure and branching patterns.Powered by a solar panel, utilizing renewable energy for an environmentally sustainable solution.</p>
+                
+                <h3>💗 Acknowledgements</h3>
+                <p>I am grateful to Universiti Teknikal Malaysia Melaka (UTeM) for accepting me into the Degree program and providing a supportive academic environment. Additionally, my deepest gratitude goes to my supervisor, Dr Riduan, for his remarkable patience, enthusiasm, insightful comments, invaluable suggestions, helpful information, practical advice, and unceasing ideas. His immense knowledge and profound experience have been pivotal in guiding me through my research and the writing of this report. I am truly fortunate to have had such an exceptional supervisor, whose precious time and relentless help have made this project possible. 
+</p>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+    <!-- Modal for viewing images/videos -->
+    <div id="mediaModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <div id="modalMedia"></div>
+            <div class="modal-info">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDescription"></p>
+            </div>
         </div>
     </div>
 
     <script>
+        // Lightning data - Replace these URLs with your actual GitHub file URLs
+        const lightningData = [
+            {
+                id: 1,
+                title: "Lightning Event #1 - Week 13 Analysis",
+                description: "Lightning channel captured during Week 13 field study. High-intensity vertical discharge with clear channel formation.",
+                image: "https://github.com/SZK0724/lightning-calculator/blob/446988b5b410cb8ce6aeb4aab96cf7da9d7f17fa/result1.png?raw=true",
+                analysis: "Distance: 2.3km, Duration: 0.2ms"
+            },
+            {
+                id: 2,
+                title: "Lightning Event #2 - Branched Pattern",
+                description: "Complex branched lightning pattern showing multiple discharge paths. Rare formation captured with high-speed imaging system.",
+                image: "https://github.com/SZK0724/lightning-calculator/blob/f9feade7d2074eebe919e123bc5f56fd03c93371/result2.png?raw=true",
+                video: "https://via.placeholder.com/800x600/2a5298/ffffff?text=Video+Not+Available",
+                analysis: "Distance: 1.8km, Duration: 0.15ms"
+            },
+            {
+                id: 3,
+                title: "Lightning Event #3 - Cloud-to-Ground",
+                description: "Classic cloud-to-ground lightning strike with clear channel formation. Perfect example of negative cloud-to-ground discharge.",
+                image: "https://github.com/SZK0724/lightning-calculator/blob/f9feade7d2074eebe919e123bc5f56fd03c93371/result3.png?raw=true",
+                video: "https://via.placeholder.com/800x600/667eea/ffffff?text=Video+Not+Available",
+                analysis: "Distance: 3.1km, Duration: 0.3ms"
+            },
+            {
+                id: 4,
+                title: "Lightning Event #4 - Intracloud Discharge",
+                description: "Intracloud lightning discharge showing horizontal propagation within cloud structure. Unique formation rarely captured.",
+                image: "https://github.com/SZK0724/lightning-calculator/blob/f9feade7d2074eebe919e123bc5f56fd03c93371/result4.png?raw=true",
+                video: "https://via.placeholder.com/800x600/764ba2/ffffff?text=Video+Not+Available",
+                analysis: "Distance: 4.2km, Duration: 0.4ms"
+            },
+            {
+                id: 5,
+                title: "Lightning Event #5 - Multiple Strikes",
+                description: "Sequence of multiple lightning strikes in rapid succession. Analysis shows progressive channel formation and decay.",
+                image: "https://github.com/SZK0724/lightning-calculator/blob/f9feade7d2074eebe919e123bc5f56fd03c93371/result5.jpg?raw=true",
+                video: "https://via.placeholder.com/800x600/ff6b6b/ffffff?text=Video+Not+Available",
+                analysis: "Distance: 1.5km, Duration: 0.25ms"
+            },
+            {
+                id: 6,
+                title: "Lightning Event #6 - Stepped Leader",
+                description: "Clear visualization of stepped leader formation preceding main discharge. Excellent example of lightning initiation process.",
+                image: "https://github.com/SZK0724/lightning-calculator/blob/f9feade7d2074eebe919e123bc5f56fd03c93371/Picture6.jpg?raw=true",
+                video: "https://via.placeholder.com/800x600/ee5a24/ffffff?text=Video+Not+Available",
+                analysis: "Distance: 2.7km, Duration: 0.18ms"
+            },
+            {
+                id: 7,
+                title: "Lightning Event #7 - Return Stroke",
+                description: "High-intensity return stroke captured with precise timing. Shows characteristic bright channel formation and propagation.",
+                image: "https://github.com/SZK0724/lightning-calculator/blob/f9feade7d2074eebe919e123bc5f56fd03c93371/Picture7.jpg?raw=true",
+                video: "https://via.placeholder.com/800x600/10ac84/ffffff?text=Video+Not+Available",
+                analysis: "Distance: 3.5km, Duration: 0.12ms"
+            },
+            {
+                id: 8,
+                title: "Lightning Event #8 - Positive Flash",
+                description: "Rare positive lightning flash with extended duration and high intensity. Significantly more powerful than typical negative flashes.",
+                image: "https://github.com/SZK0724/lightning-calculator/blob/f9feade7d2074eebe919e123bc5f56fd03c93371/result8.jpg?raw=true",
+                video: "https://via.placeholder.com/800x600/5f27cd/ffffff?text=Video+Not+Available",
+                analysis: "Distance: 2.1km, Duration: 0.35ms"
+            },
+            {
+                id: 9,
+                title: "Lightning Event #9 - Forked Channel",
+                description: "Spectacular forked lightning channel showing bifurcation near ground level. Complex discharge pattern with multiple termination points.",
+                image: "https://github.com/SZK0724/lightning-calculator/blob/f9feade7d2074eebe919e123bc5f56fd03c93371/result9.jpg?raw=true",
+                video: "https://via.placeholder.com/800x600/00d2d3/ffffff?text=Video+Not+Available",
+                analysis: "Distance: 1.9km, Duration: 0.22ms"
+            },
+            {
+                id: 10,
+                title: "Lightning Event #10 - Anvil Crawler",
+                description: "Horizontal anvil crawler lightning extending across cloud top. Long-duration discharge with complex branching pattern.",
+                image: "https://via.placeholder.com/400x300/ff9ff3/ffffff?text=Lightning+Event+10?raw=true",
+                video: "https://via.placeholder.com/800x600/ff9ff3/ffffff?text=Video+Not+Available",
+                analysis: "Distance: 5.8km, Duration: 0.8ms"
+            }
+        ];
+
+        // Generate gallery items
+        function generateGallery() {
+            const galleryGrid = document.getElementById('galleryGrid');
+            galleryGrid.innerHTML = '';
+            
+            lightningData.forEach(item => {
+                const lightningItem = document.createElement('div');
+                lightningItem.className = 'lightning-item';
+                lightningItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}" onclick="openModal(${item.id}, 'image')">
+                    <div class="lightning-info">
+                        <h3>${item.title}</h3>
+                        <p>${item.description}</p>
+                        <p style="font-size: 0.9rem; color: #1e3c72; font-weight: 600; margin-bottom: 1rem;">${item.analysis}</p>
+                        <button class="view-video-btn" onclick="openModal(${item.id}, 'video')">📹 View Analysis Video</button>
+                    </div>
+                `;
+                galleryGrid.appendChild(lightningItem);
+            });
+        }
+
+        // Show different sections
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update mobile navigation
+            const mobileButtons = document.querySelectorAll('.mobile-nav button');
+            mobileButtons.forEach(btn => btn.classList.remove('active'));
+            document.getElementById(sectionId + '-btn').classList.add('active');
+        }
+
+        // Calculator functions
         function calculateDistance() {
-            // Get the input value
             const timeInput = document.getElementById('timeInput');
             const resultContainer = document.getElementById('resultContainer');
             const errorMessage = document.getElementById('errorMessage');
             const resultText = document.getElementById('resultText');
             const resultDetails = document.getElementById('resultDetails');
             
-            // Hide previous results and errors
             resultContainer.classList.remove('show');
             errorMessage.classList.remove('show');
             
-            // Get the time difference value
             const timeDifference = parseFloat(timeInput.value);
             
-            // Validate input
             if (isNaN(timeDifference) || timeDifference < 0) {
                 errorMessage.textContent = 'Please enter a valid positive number for the time difference.';
                 errorMessage.classList.add('show');
@@ -235,13 +740,11 @@
                 return;
             }
             
-            // Calculate distances
-            const distanceMiles = timeDifference / 5;  // Convert to miles
-            const distanceKm = distanceMiles * 1.60934;  // Convert to kilometers
-            const distanceFeet = distanceMiles * 5280;  // Convert to feet
-            const distanceMeters = distanceKm * 1000;  // Convert to meters
+            const distanceMiles = timeDifference / 5;
+            const distanceKm = distanceMiles * 1.60934;
+            const distanceFeet = distanceMiles * 5280;
+            const distanceMeters = distanceKm * 1000;
             
-            // Display results
             resultText.textContent = `Lightning struck ${distanceMiles.toFixed(2)} miles away`;
             
             let details = `That's ${distanceKm.toFixed(2)} kilometers`;
@@ -254,21 +757,64 @@
             
             resultDetails.textContent = details;
             
-            // Show result with animation
             setTimeout(() => {
                 resultContainer.classList.add('show');
             }, 100);
         }
-        
-        // Allow Enter key to calculate
+
+        // Modal functions
+        function openModal(lightningId, mediaType) {
+            const modal = document.getElementById('mediaModal');
+            const modalMedia = document.getElementById('modalMedia');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            
+            const item = lightningData.find(data => data.id === lightningId);
+            
+            modalTitle.textContent = item.title;
+            modalDescription.textContent = item.description + ' | ' + item.analysis;
+            
+            if (mediaType === 'image') {
+                modalMedia.innerHTML = `<img src="${item.image}" alt="${item.title}">`;
+            } else {
+                modalMedia.innerHTML = `
+                    <div style="text-align: center; padding: 2rem; color: #666;">
+                        <h3>Video Analysis</h3>
+                        <p>High-speed video analysis of ${item.title}</p>
+                        <p style="margin-top: 1rem; font-style: italic;">Video files are stored locally on the Raspberry Pi system. In a real deployment, these would be actual lightning analysis videos.</p>
+                        <div style="background: #f0f0f0; padding: 2rem; margin: 1rem 0; border-radius: 10px;">
+                            <p><strong>Analysis Results:</strong></p>
+                            <p>${item.analysis}</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('mediaModal').style.display = 'none';
+        }
+
+        // Event listeners
         document.getElementById('timeInput').addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
                 calculateDistance();
             }
         });
-        
-        // Auto-focus on input when page loads
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('mediaModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Initialize
         window.addEventListener('load', function() {
+            generateGallery();
             document.getElementById('timeInput').focus();
         });
     </script>
