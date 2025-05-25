@@ -517,43 +517,34 @@
                 Digital image processing techniques applied to lightning analysis using computer vision algorithms (MATLAB)
             </p>
             
-            <!-- Slow Motion Processing -->
-            <div style="background: white; border-radius: 15px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
-                <h3 style="color: #1e3c72; margin-bottom: 1.5rem; font-size: 1.8rem; text-align: center;">
-                    🎥 Slow Motion Image Processing Algorithm
-                </h3>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; align-items: center;">
-                    <div>
-                        <h4 style="color: #2a5298; margin-bottom: 1rem;">Algorithm Overview</h4>
-                        <p style="margin-bottom: 1rem; line-height: 1.6;">
-                            A slow-motion algorithm is applied to reduced playback speed and analyze the formation and propagation of the lightning channel more details. 
+           <!-- Slow Motion Processing -->
+<div style="background: white; border-radius: 15px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
+  <h3 style="color: #1e3c72; margin-bottom: 1.5rem; font-size: 1.8rem; text-align: center;">
+    🎥 Slow Motion Image Processing Algorithm
+  </h3>
 
-                        </p>
-                        <ul style="color: #666; line-height: 1.8; margin-left: 1.5rem;">
-                            <li>Raspberry Pi camera V2 capture at 60 FPS</li>
-                            <li>Temporal interpolation algorithms</li>
-                            <li>Motion vector analysis</li>
-                            <li>Frame-by-frame lightning tracking</li>
-                        </ul>
-                    </div>
-                    
-                    <div style="text-align: center;">
-                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1.5rem; border-radius: 12px;">
-                            <h4 style="margin-bottom: 1rem;">Processing Results</h4>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; text-align: left;">
-                                <div>Frame Rate: <strong>1200 FPS</strong></div>
-                                <div>Resolution: <strong>1920x1080</strong></div>
-                                <div>Processing Time: <strong>2.3s</strong></div>
-                                <div>Accuracy: <strong>98.5%</strong></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                
-               
-            </div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; align-items: center;">
+    <div>
+      <h4 style="color: #2a5298; margin-bottom: 1rem;">Algorithm Overview</h4>
+      <p style="margin-bottom: 1rem; line-height: 1.6;">
+        A slow-motion algorithm is applied to reduce playback speed and analyze the formation and propagation of the lightning channel in more detail.
+      </p>
+      <ul style="color: #666; line-height: 1.8; margin-left: 1.5rem;">
+        <li>Raspberry Pi camera V2 capture at 60 FPS</li>
+        <li>Temporal interpolation algorithms</li>
+        <li>Motion vector analysis</li>
+        <li>Frame-by-frame lightning tracking</li>
+      </ul>
+    </div>
+
+    <div style="text-align: center;">
+      <video width="100%" controls style="border-radius: 12px;">
+        <source src="https://raw.githubusercontent.com/SZK0724/lightning-calculator/c1f90cc74f7889de2363dd9651285d3df20952ac/slowmo.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+</div>
             
             <!-- Image Processing Techniques -->
             <div style="background: white; border-radius: 15px; padding: 2rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
@@ -942,6 +933,8 @@
             setTimeout(() => {
                 resultContainer.classList.add('show');
             }, 100);
+            
+
         }
 
         // Modal functions
