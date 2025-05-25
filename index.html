@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lightning Distance Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .calculator-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .calculator-container:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .calculate-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+            width: 100%;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .calculate-btn:active {
+            transform: translateY(0);
+        }
+
+        .result-container {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .result-container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .result-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .result-details {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .error-message {
+            background: #ff6b6b;
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 20px;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .error-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            text-align: left;
+            color: #1565c0;
+            font-size: 0.9rem;
+        }
+
+        .lightning-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 480px) {
+            .calculator-container {
+                padding: 25px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="lightning-icon">⚡</div>
+        <h1>Lightning Distance Calculator</h1>
+        <p class="subtitle">Calculate how far lightning struck based on the time difference between flash and thunder</p>
+        
+        <div class="input-group">
+            <label for="timeInput">Time difference between flash and thunder (seconds):</label>
+            <input type="number" id="timeInput" placeholder="Enter time in seconds" step="0.1" min="0">
+        </div>
+        
+        <button class="calculate-btn" onclick="calculateDistance()">Calculate Distance</button>
+        
+        <div id="resultContainer" class="result-container">
+            <div class="result-text" id="resultText"></div>
+            <div class="result-details" id="resultDetails"></div>
+        </div>
+        
+        <div id="errorMessage" class="error-message"></div>
+        
+        <div class="info-box">
+            <strong>How it works:</strong> Sound travels at approximately 1,125 feet per second (343 meters per second). Since there are 5,280 feet in a mile, dividing the time by 5 gives you the distance in miles.
+        </div>
+    </div>
+
+    <script>
+        function calculateDistance() {
+            // Get the input value
+            const timeInput = document.getElementById('timeInput');
+            const resultContainer = document.getElementById('resultContainer');
+            const errorMessage = document.getElementById('errorMessage');
+            const resultText = document.getElementById('resultText');
+            const resultDetails = document.getElementById('resultDetails');
+            
+            // Hide previous results and errors
+            resultContainer.classList.remove('show');
+            errorMessage.classList.remove('show');
+            
+            // Get the time difference value
+            const timeDifference = parseFloat(timeInput.value);
+            
+            // Validate input
+            if (isNaN(timeDifference) || timeDifference < 0) {
+                errorMessage.textContent = 'Please enter a valid positive number for the time difference.';
+                errorMessage.classList.add('show');
+                return;
+            }
+            
+            if (timeDifference === 0) {
+                errorMessage.textContent = 'Time difference cannot be zero. Lightning and thunder happen at different times!';
+                errorMessage.classList.add('show');
+                return;
+            }
+            
+            // Calculate distances
+            const distanceMiles = timeDifference / 5;  // Convert to miles
+            const distanceKm = distanceMiles * 1.60934;  // Convert to kilometers
+            const distanceFeet = distanceMiles * 5280;  // Convert to feet
+            const distanceMeters = distanceKm * 1000;  // Convert to meters
+            
+            // Display results
+            resultText.textContent = `Lightning struck ${distanceMiles.toFixed(2)} miles away`;
+            
+            let details = `That's ${distanceKm.toFixed(2)} kilometers`;
+            if (distanceMiles < 1) {
+                details += ` or ${distanceFeet.toFixed(0)} feet`;
+            }
+            if (distanceKm < 1) {
+                details += ` or ${distanceMeters.toFixed(0)} meters`;
+            }
+            
+            resultDetails.textContent = details;
+            
+            // Show result with animation
+            setTimeout(() => {
+                resultContainer.classList.add('show');
+            }, 100);
+        }
+        
+        // Allow Enter key to calculate
+        document.getElementById('timeInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                calculateDistance();
+            }
+        });
+        
+        // Auto-focus on input when page loads
+        window.addEventListener('load', function() {
+            document.getElementById('timeInput').focus();
+        });
+    </script>
+</body>
+</html>
