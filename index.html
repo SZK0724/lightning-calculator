@@ -559,13 +559,144 @@
 
             
             <!-- Image Processing Techniques -->
-            <div style="background: white; border-radius: 15px; padding: 2rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
-                <h3 style="color: #1e3c72; margin-bottom: 1.5rem; font-size: 1.8rem; text-align: center;">
-                    🔍 Image Processing Techniques
-                </h3>
+           <!-- Image Processing Techniques -->
+<div style="background: white; border-radius: 15px; padding: 2rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
+    <h3 style="color: #1e3c72; margin-bottom: 1.5rem; font-size: 1.8rem; text-align: center;">
+        🔍 Image Processing Techniques
+    </h3>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+        
+        <!-- Technique 1: Image Conversion -->
+        <div style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: white; padding: 1.5rem; border-radius: 12px;">
+            <h4 style="margin-bottom: 1rem;">🔁 Image Conversion</h4>
+            <p style="margin-bottom: 1rem; line-height: 1.5;">
+                The color image is converted to grayscale to easy and efficient analysis of lightning characteristics. This reduces complexity and focus on  intensity of lightning channels rather than color information.
+
+            </p>
+            <ul style="line-height: 1.6; margin-left: 1rem; font-size: 0.9rem;">
+                <li>RGB to Grayscale</li>
+                <li>24 bits to 8 bits</li>
+            </ul>
+            <!-- Image Grid: 2 Rows × 2 Columns -->
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem;">
+        <div style="text-align: center;">
+            <img src="https://github.com/SZK0724/lightning-calculator/blob/0bfe74568b09817dc970a98d6df6b52e2acf2ed6/colour.png?raw=true" alt="Color Image" style="width: 100%; border-radius: 8px;">
+            <p style="margin-top: 0.5rem;">Color Image</p>
+        </div>
+        <div style="text-align: center;">
+            <img src="https://github.com/SZK0724/lightning-calculator/blob/0bfe74568b09817dc970a98d6df6b52e2acf2ed6/greyscale.png?raw=true" alt="Greyscale image" style="width: 100%; border-radius: 8px;">
+            <p style="margin-top: 0.5rem;">Greyscale image</p>
+        </div>
+             </div>
+ </div>
+        <!-- Technique 2: Geometric Transformation -->
+        <div style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); color: white; padding: 1.5rem; border-radius: 12px;">
+            <h4 style="margin-bottom: 1rem;">📐 Geometric Transformation</h4>
+            <p style="margin-bottom: 1rem; line-height: 1.5;">
+                Zoom and crop the region of interest (ROI) to focus on the lightning channel.
+            </p>
+            <ul style="line-height: 1.6; margin-left: 1rem; font-size: 0.9rem;">
+                <li>Scaling and cropping</li>
+                <li>Rotation & translation</li>
+                <li>Affine and perspective transform</li>
+            </ul><br><br>
+        <!-- Image Grid: 2 Rows × 2 Columns -->
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem;">
+        <div style="text-align: center;">
+            <img src="https://github.com/SZK0724/lightning-calculator/blob/3f61eb43d1eb6ad9e8d99bbb6283ce0b8f1f7503/orisize.png?raw=true" alt="Original Image" style="width: 100%; border-radius: 8px;">
+        <br><br>
+            <p style="margin-top: 0.4rem;">Original Image</p>
+        </div>
+        <div style="text-align: center;">
+            <img src="https://github.com/SZK0724/lightning-calculator/blob/3f61eb43d1eb6ad9e8d99bbb6283ce0b8f1f7503/cropsize.png?raw=true" alt="Cropped imaged" style="width: 100%; border-radius: 8px;">
+            <p style="margin-top: 0.5rem;">Cropped image</p>
+        </div>
+             </div>
+ </div>
+
+        <!-- Technique 3: Image Restoration -->
+        <div style="background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%); color: white; padding: 1.5rem; border-radius: 12px;">
+            <h4 style="margin-bottom: 1rem;">🧹 Image Restoration</h4>
+            <p style="margin-bottom: 1rem; line-height: 1.5;">
+               Noise can be introduced due to electronic devices interference (Raspberry Pi Camera V2), environmental conditions such as rain, dust, fog, and night-time darkness. To mitigate these effects, high-pass and low-pass filtering techniques are applied:
+            </p>
+            <ul style="line-height: 1.6; margin-left: 1rem; font-size: 0.9rem;">
+                <li>Median filter to enhances edges and sharpens important details in the image. </li>
+                <li>Averaging filter to smooths the image.</li>
+                <li>Motion blur correction to correct blurriness. </li>
+            </ul> <br>
+            <center>Performance Evaluation: Mean vs. Median Filter</center>
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;"> <thead> <tr style="background-color: rgba(255, 255, 255, 0.2);"> <th style="padding: 0.5rem; border-bottom: 1px solid #fff;">Metrics</th> <th style="padding: 0.5rem; border-bottom: 1px solid #fff;">Desnoising (Mean Filter)</th> <th style="padding: 0.5rem; border-bottom: 1px solid #fff;">Desnoising (Median Filter)</th> </tr> </thead> <tbody> <tr> <td style="padding: 0.5rem;">MSE</td> <td style="padding: 0.5rem;">165.5140</td> <td style="padding: 0.5rem;">1.6534</td> </tr> <tr> <td style="padding: 0.5rem;">MAE</td> <td style="padding: 0.5rem;">6.2219</td> <td style="padding: 0.5rem;">0.1032</td> </tr> <tr> <td style="padding: 0.5rem;">RMS</td> <td style="padding: 0.5rem;">12.8652</td> <td style="padding: 0.5rem;">1.2858</td> </tr> <tr> <td style="padding: 0.5rem;">PSNR</td> <td style="padding: 0.5rem;">25.9425 dB</td> <td style="padding: 0.5rem;">45.9471 dB</td> </tr> <tr> <td style="padding: 0.5rem;">SNR</td> <td style="padding: 0.5rem;">9.2619 dB</td> <td style="padding: 0.5rem;">29.2666 dB</td> </tr> <tr> <td style="padding: 0.5rem;">NCC</td> <td style="padding: 0.5rem;">0.8034</td> <td style="padding: 0.5rem;">0.9973</td> </tr> <tr> <td style="padding: 0.5rem;">SSIM</td> <td style="padding: 0.5rem;">0.4995</td> <td style="padding: 0.5rem;">0.9987</td> </tr> </tbody> </table> </div>
+        
+
+        <!-- Technique 4: Image Enhancement -->
+        <div style="background: linear-gradient(135deg, #ff6a00 0%, #ee0979 100%); color: white; padding: 1.5rem; border-radius: 12px;">
+            <h4 style="margin-bottom: 1rem;">✨ Image Enhancement</h4>
+            <p style="margin-bottom: 1rem; line-height: 1.5;">
+                Enhance the contrast and intensity of the image so that the edges, structure, and fine details of the lightning can be observed more clearly. 
+            </p>
+            <ul style="line-height: 1.6; margin-left: 1rem; font-size: 0.9rem;">
+                <li>Histogram equalization</li>
+                <li>Contrast stretching</li>
                 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
-                    <!-- Technique 1 -->
+            </ul> <br>
+            <!-- Image Grid: 2 Rows × 2 Columns -->
+
+        <div style="text-align: center;">
+            <img src="https://github.com/SZK0724/lightning-calculator/blob/adf261eba528d8ea4d49dc9a2b4b39684e483a29/before1.png?raw=true" alt="Before enhancement" style="width: 100%; border-radius: 8px;">
+            <p style="margin-top: -0.5rem;">Before enhancement</p>
+        </div>
+        <div style="text-align: center;">
+            <img src="https://github.com/SZK0724/lightning-calculator/blob/adf261eba528d8ea4d49dc9a2b4b39684e483a29/beforeg.png?raw=true" alt=Histogram "before enhancement" style="width: 100%; border-radius: 8px;">
+            <p style="margin-top: -0.5rem;">Histogram "before enhancement"</p>
+        </div><br>
+        <div style="text-align: center;">
+            <img src="https://github.com/SZK0724/lightning-calculator/blob/adf261eba528d8ea4d49dc9a2b4b39684e483a29/after.png?raw=true" alt="After enhancement" style="width: 100%; border-radius: 8px;">
+            <p style="margin-top:-0.5rem;">After enhancement</p>
+        </div>
+        <div style="text-align: center;">
+            <img src="https://github.com/SZK0724/lightning-calculator/blob/adf261eba528d8ea4d49dc9a2b4b39684e483a29/afterg.png?raw=true" alt="Histogram after enhancement" style="width: 100%; border-radius: 8px;">
+            <p style="margin-top:-0.5rem;">Histogram "after enhancement"</p>
+            
+            <!-- Analyze -->
+    <div style="background-color: rgba(255, 255, 255, 0.15); padding: 1rem; margin-top: 2rem; border-radius: 8px;">
+        <h5 style="margin-bottom: 0.5rem;">📝 Analyze:</h5>
+        <ul style="line-height: 1.6; font-size: 0.9rem;">
+            <li>Histogram Equalization redistributes pixel intensities to achieve a more uniform histogram, making features more distinguishable.</li>
+        </ul>
+    </div>
+        </div>
+    </div>
+    
+
+        <!-- Technique 5: Image Segmentation -->
+        <div style="background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%); color: white; padding: 1.5rem; border-radius: 12px;">
+            <h4 style="margin-bottom: 1rem;">🧩 Image Segmentation</h4>
+            <p style="margin-bottom: 1rem; line-height: 1.5;">
+                Isolate lightning channels from the background for individual analysis.
+            </p>
+            <ul style="line-height: 1.6; margin-left: 1rem; font-size: 0.9rem;">
+                <li>Thresholding (Otsu, adaptive)</li>
+                <li>Watershed algorithm</li>
+                <li>Region growing & contour detection</li>
+            </ul>
+        </div>
+
+        <!-- Technique 6: Feature Extraction -->
+        <div style="background: linear-gradient(135deg, #00c9ff 0%, #92fe9d 100%); color: white; padding: 1.5rem; border-radius: 12px;">
+            <h4 style="margin-bottom: 1rem;">🔎 Feature Extraction</h4>
+            <p style="margin-bottom: 1rem; line-height: 1.5;">
+                Extract meaningful characteristics of lightning such as length and branching.
+            </p>
+            <ul style="line-height: 1.6; margin-left: 1rem; font-size: 0.9rem;">
+                <li>Channel length estimation</li>
+                <li>Branch counting</li>
+                <li>Intensity & angle analysis</li>
+            </ul>
+        </div>
+        
+ <!-- Technique 7 -->
 <div style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%); color: white; padding: 1.5rem; border-radius: 12px;">
     <h4 style="margin-bottom: 1rem;">🎯 Edge Detection</h4>
     <p style="margin-bottom: 1rem; line-height: 1.5;">
@@ -608,48 +739,10 @@
         </ul>
     </div>
 </div>
-                    <!-- Technique 2 -->
-                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1.5rem; border-radius: 12px;">
-                        <h4 style="margin-bottom: 1rem;">📊 Histogram Analysis</h4>
-                        <p style="margin-bottom: 1rem; line-height: 1.5;">
-                            Intensity histogram analysis for lightning brightness characterization and noise reduction.
-                        </p>
-                        <ul style="line-height: 1.6; margin-left: 1rem; font-size: 0.9rem;">
-                            <li>Intensity distribution mapping</li>
-                            <li>Contrast enhancement</li>
-                            <li>Dynamic range optimization</li>
-                            <li>Background subtraction</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Technique 3 -->
-                    <div style="background: linear-gradient(135deg, #10ac84 0%, #00d2d3 100%); color: white; padding: 1.5rem; border-radius: 12px;">
-                        <h4 style="margin-bottom: 1rem;">🌿 Morphological Operations</h4>
-                        <p style="margin-bottom: 1rem; line-height: 1.5;">
-                            Morphological filtering to enhance lightning channel connectivity and remove artifacts.
-                        </p>
-                        <ul style="line-height: 1.6; margin-left: 1rem; font-size: 0.9rem;">
-                            <li>Erosion and dilation</li>
-                            <li>Opening and closing</li>
-                            <li>Skeletonization</li>
-                            <li>Channel thinning</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Technique 4 -->
-                    <div style="background: linear-gradient(135deg, #5f27cd 0%, #ff9ff3 100%); color: white; padding: 1.5rem; border-radius: 12px;">
-                        <h4 style="margin-bottom: 1rem;">⚡ Threshold Segmentation</h4>
-                        <p style="margin-bottom: 1rem; line-height: 1.5;">
-                            Adaptive thresholding for separating lightning channels from background noise and clouds.
-                        </p>
-                        <ul style="line-height: 1.6; margin-left: 1rem; font-size: 0.9rem;">
-                            <li>Otsu's automatic thresholding</li>
-                            <li>Adaptive mean thresholding</li>
-                            <li>Multi-level segmentation</li>
-                            <li>Region growing algorithms</li>
-                        </ul>
-                    </div>
-                </div>
+
+    </div>
+</div>
+
                 
                 <div style="margin-top: 2rem; padding: 2rem; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; border-radius: 12px; text-align: center;">
   <h4 style="margin-bottom: 1rem;">🔬 Image Processing Flowchart</h4>
