@@ -641,7 +641,6 @@
                 <li>Contrast stretching</li>
                 
             </ul> <br>
-            <!-- Image Grid: 2 Rows × 2 Columns -->
 
         <div style="text-align: center;">
             <img src="https://github.com/SZK0724/lightning-calculator/blob/adf261eba528d8ea4d49dc9a2b4b39684e483a29/before1.png?raw=true" alt="Before enhancement" style="width: 100%; border-radius: 8px;">
@@ -678,9 +677,17 @@
             </p>
             <ul style="line-height: 1.6; margin-left: 1rem; font-size: 0.9rem;">
                 <li>Thresholding (Otsu, adaptive)</li>
-                <li>Watershed algorithm</li>
-                <li>Region growing & contour detection</li>
-            </ul>
+                <li>Color Segmentation (Sobel edge detection)</li>
+            </ul><br>
+            
+            <div style="text-align: center;">
+            <img src="https://github.com/SZK0724/lightning-calculator/blob/656c9b2261aa51e2e3bde0acc0c9b04f7c9b0fff/segmen1.png?raw=true" style="width: 100%; border-radius: 8px;">
+            <p style="margin-top: -0.5rem;">Adaptive threshold mask</p>
+        </div><br>
+        <div style="text-align: center;">
+            <img src="https://github.com/SZK0724/lightning-calculator/blob/656c9b2261aa51e2e3bde0acc0c9b04f7c9b0fff/segmen2.jpg?raw=true" alt=Histogram "before enhancement" style="width: 100%; border-radius: 8px;">
+            <p style="margin-top: -0.5rem;">Sobel edge detection</p>
+            </div>
         </div>
 
         <!-- Technique 6: Feature Extraction -->
@@ -689,11 +696,45 @@
             <p style="margin-bottom: 1rem; line-height: 1.5;">
                 Extract meaningful characteristics of lightning such as length and branching.
             </p>
-            <ul style="line-height: 1.6; margin-left: 1rem; font-size: 0.9rem;">
-                <li>Channel length estimation</li>
-                <li>Branch counting</li>
-                <li>Intensity & angle analysis</li>
+            
+             <div style="background-color: rgba(255, 255, 255, 0.15); padding: 1rem; margin-top: 2rem; border-radius: 8px;">
+        <h5 style="margin-bottom: 0.5rem;">⚡Branches length </h5>
+        <ul style="line-height: 1.6; font-size: 0.9rem;">
+            <li>Detected edges overlaid in red and each branch labeled with its corresponding number in blue.</li>
+            <br>
+            <div style="text-align: center;">
+            <img src="https://github.com/SZK0724/lightning-calculator/blob/6e304161477350ebad920c382ab7e973f8efafd8/blength.png?raw=true" alt=Branhing label" style="width: 100%; border-radius: 8px;">
+            <p style="margin-top: -0.5rem;">Branhing label</p>
+            
+            
+            <div style="text-align: center;">
+            <img src="https://github.com/SZK0724/lightning-calculator/blob/6e304161477350ebad920c382ab7e973f8efafd8/glength.png?raw=true" alt=Histogram of lightning branch length " style="width: 100%; border-radius: 8px;">
+            <p style="margin-top: -0.5rem;">Histogram of lightning branch length </p>
+            
+             <div style="background-color: rgba(255, 255, 255, 0.15); padding: 1rem; margin-top: 2rem; border-radius: 8px;">
+        <h5 style="margin-bottom: 0.5rem;">📝 Analyze:</h5>
+        <ul style="line-height: 1.6; font-size: 0.9rem;">
+            <li>Totally 34 channels. Channel-15 having longest length.</li>
+        </ul>
+    </div>
+ 
+ 
+        </ul>
+    </div>
+
+ <div style="background-color: rgba(255, 255, 255, 0.15); padding: 1rem; margin-top: 2rem; border-radius: 8px;">
+        <h5 style="margin-bottom: 0.5rem;">⚡Main Branch and Sub-branches </h5>
+        <ul style="line-height: 1.6; font-size: 0.9rem;">
+            <li>The main lightning branch is determined by finding the segmentation component with the largest area.</li>
+            <br>
+            <div style="text-align: center;">
+            <img src="https://github.com/SZK0724/lightning-calculator/blob/6e304161477350ebad920c382ab7e973f8efafd8/bclass.png?raw=true" alt=Main Branch and Sub-branches label" style="width: 100%; border-radius: 8px;">
+            <p style="margin-top: -1.5rem;">Main Branch and Sub-branches</p>
+            
+    </div>
+    
             </ul>
+        </div>
         </div>
         
  <!-- Technique 7 -->
