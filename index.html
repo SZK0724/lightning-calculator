@@ -566,19 +566,48 @@
                 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
                     <!-- Technique 1 -->
-                    <div style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%); color: white; padding: 1.5rem; border-radius: 12px;">
-                        <h4 style="margin-bottom: 1rem;">🎯 Edge Detection</h4>
-                        <p style="margin-bottom: 1rem; line-height: 1.5;">
-                            Canny edge detection algorithm to identify lightning channel boundaries and branch points.
-                        </p>
-                        <ul style="line-height: 1.6; margin-left: 1rem; font-size: 0.9rem;">
-                            <li>Gaussian blur preprocessing</li>
-                            <li>Gradient calculation</li>
-                            <li>Non-maximum suppression</li>
-                            <li>Hysteresis thresholding</li>
-                        </ul>
-                    </div>
-                    
+<div style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%); color: white; padding: 1.5rem; border-radius: 12px;">
+    <h4 style="margin-bottom: 1rem;">🎯 Edge Detection</h4>
+    <p style="margin-bottom: 1rem; line-height: 1.5;">
+        Edge detection algorithm used to identify lightning channel boundaries and branch points.
+    </p>
+    <ul style="line-height: 1.6; margin-left: 1rem; font-size: 0.9rem;">
+        <li>Canny Edge Detection</li>
+        <li>LoG Edge Detection</li>
+        <li>Prewitt Edge Detection</li>
+        <li>Sobel Edge Detection</li>
+    </ul>
+
+    <!-- Image Grid: 2 Rows × 2 Columns -->
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem;">
+        <div style="text-align: center;">
+            <img src="https://github.com/SZK0724/lightning-calculator/blob/0fdb98dd1b0d92024347911905d9261d3d16e3e4/canny.png?raw=true" alt="Canny Edge Detection" style="width: 100%; border-radius: 8px;">
+            <p style="margin-top: 0.5rem;">Canny Edge Detection</p>
+        </div>
+        <div style="text-align: center;">
+            <img src="https://github.com/SZK0724/lightning-calculator/blob/0fdb98dd1b0d92024347911905d9261d3d16e3e4/log.png?raw=true" alt="LoG Edge Detection" style="width: 100%; border-radius: 8px;">
+            <p style="margin-top: 0.5rem;">LoG Edge Detection</p>
+        </div>
+        <div style="text-align: center;">
+            <img src="https://github.com/SZK0724/lightning-calculator/blob/0fdb98dd1b0d92024347911905d9261d3d16e3e4/prewitt.png?raw=true" alt="Prewitt Edge Detection" style="width: 100%; border-radius: 8px;">
+            <p style="margin-top: 0.5rem;">Prewitt Edge Detection</p>
+        </div>
+        <div style="text-align: center;">
+            <img src="https://github.com/SZK0724/lightning-calculator/blob/0fdb98dd1b0d92024347911905d9261d3d16e3e4/sobel.png?raw=true" alt="Sobel Edge Detection" style="width: 100%; border-radius: 8px;">
+            <p style="margin-top: 0.5rem;">Sobel Edge Detection</p>
+        </div>
+    </div>
+
+    <!-- Observations -->
+    <div style="background-color: rgba(255, 255, 255, 0.15); padding: 1rem; margin-top: 2rem; border-radius: 8px;">
+        <h5 style="margin-bottom: 0.5rem;">📝 Observation:</h5>
+        <ul style="line-height: 1.6; font-size: 0.9rem;">
+            <li>LoG edge detection method detected broad edges causing some extra unwanted lines.</li>
+            <li>Canny edge detection method is similar to LoG method, the broad edge was detected but less blurred.</li>
+            <li>Sobel method detected edges well and it seems to look more similar to the original edge.</li>
+        </ul>
+    </div>
+</div>
                     <!-- Technique 2 -->
                     <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1.5rem; border-radius: 12px;">
                         <h4 style="margin-bottom: 1rem;">📊 Histogram Analysis</h4>
